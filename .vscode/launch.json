@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [              
+        {
+            "name": "launch chrome",
+            "port": 9222,
+            "request": "attach",
+            "type": "pwa-chrome",
+            "webRoot": "${workspaceFolder}",
+            "url": "http://localhost:4200/"
+        },
+        {
+            "command": "ng serve",
+            "name": "Run ng serve",
+            "request": "launch",
+            "type": "node-terminal",
+            "cwd": "${workspaceFolder}/torito"
+        },
+    ],
+    "compounds": [
+        {
+            "name": "Compound",
+            "configurations": ["Run ng serve", "launch chrome"]
+        }
+    ]
+    
+}
