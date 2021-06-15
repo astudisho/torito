@@ -22,7 +22,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   private loadGoogleScript() {
     const loader = new Loader({
-      apiKey: 'AIzaSyD1JA--qc_B3U01Tpwdy1TyS-vu4lZLVnY',
+      apiKey: 'AIzaSyC2JyVSt2Nm8P3xtafC0uiHfgkKknlZshc',
       version: 'weekly'
     });
 
