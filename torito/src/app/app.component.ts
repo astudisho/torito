@@ -3,6 +3,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { } from 'googlemaps';
 // import { google } from '@google/maps';
 import { Loader } from '@googlemaps/js-api-loader';
+import { ToritoService } from './services/torito.service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,13 @@ import { Loader } from '@googlemaps/js-api-loader';
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'torito';
   map!: google.maps.Map;
+
+  /**
+   *
+   */
+  constructor(private toritoService: ToritoService) {
+    
+  }
   ngAfterViewInit(): void {
     this.loadGoogleScript();
   }
@@ -39,20 +47,30 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   private runGeocoder(): void {
-    const geocoder = new google.maps.Geocoder();
-    const addresses = ['Av. Guadalupe entre Tchaikovski y Periferico.'];
+    // const geocoder = new google.maps.Geocoder();
+    // const addresses = ['Av. Guadalupe entre Tchaikovski y Periferico.'];
 
-    addresses.forEach((x) => {
-      geocoder.geocode({ address: x }, (result, status) => {
-        if (status === 'OK') {
-          const marker = new google.maps.Marker({
-            map: this.map,
-            position: result[0].geometry.location
-          });
-        }
-        else {
-          console.error("Error: " + status);
-        }
+    // addresses.forEach((x) => {
+    //   geocoder.geocode({ address: x }, (result, status) => {
+    //     if (status === 'OK') {
+    //       const marker = new google.maps.Marker({
+    //         map: this.map,
+    //         position: result[0].geometry.location
+    //       });
+    //     }
+    //     else {
+    //       console.error("Error: " + status);
+    //     }
+    //   });
+    // });
+    this.toritoService.getRecentToritos()
+    .subscribe(value => {
+      console.log(value);
+      value.forEach(x => {
+        const marker = new google.maps.Marker({
+          map: this.map,
+          position: {lat: x.location.lat, lng: x.location.lng} 
+        });
       });
     });
   }
